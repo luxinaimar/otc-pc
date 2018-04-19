@@ -10,10 +10,20 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+@import "~common/less/variable";
+html, body{
+	background-color: @main_bgc;
+	height: 100%;
+	width: 100%;
+}
 #app {
-  font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,Arial,sans-serif;
+  font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
   min-width: 1200px;
   min-height: 100%;
+  &:after {
+    content: "";
+    display: block;
+  }
 }
 </style>

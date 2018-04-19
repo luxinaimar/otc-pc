@@ -21,6 +21,7 @@ export default {
 <style lang="less" scoped>
   @import "~common/less/variable";
   .footer{
+    position: fixed;
     width: 100%;
     min-width: 1200px;
   }
