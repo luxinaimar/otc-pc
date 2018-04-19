@@ -54,7 +54,7 @@ export default {
       color: @color-white;
     }
     .router-link-active, .nav-link:hover{
-      color: @color-regular-blue;
+      color: @color-light-blue;
     }
   }
   .login{
