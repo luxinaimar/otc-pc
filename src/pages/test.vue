@@ -27,7 +27,13 @@ export default {
     ])
   },
   created() {
-    this._userReg()
+    let data = {
+      'user_name': 'hahha',
+      'sms_code': 9570,
+      'mobile_phone': 15176501024,
+      'passwd': '612345Bt'
+    }
+    this._userReg(data)
     this.setSinger({dd: 2})
     this.setUser({dd: 3})
     this.setOrderUser({da: 4})
@@ -36,8 +42,8 @@ export default {
     console.log(this.orderUser)
   },
   methods: {
-    _userReg() {
-      userReg().then((res) => {
+    _userReg(params) {
+      userReg(params).then((res) => {
         if (res.code === ERR_OK) {
           console.log(res)
         }
