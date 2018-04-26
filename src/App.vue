@@ -6,6 +6,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: 'otc-pc'
+  },
   name: 'App'
 }
 </script>

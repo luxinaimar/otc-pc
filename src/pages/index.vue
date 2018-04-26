@@ -89,6 +89,9 @@
 import otcPage from 'components/otc-page/otc-page'
 
 export default {
+  metaInfo: {
+    title: '首页'
+  },
   name: 'HelloWorld',
   data () {
     return {

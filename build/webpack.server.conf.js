@@ -30,7 +30,7 @@ module.exports = merge(baseConfig, {
   output: {
     libraryTarget: 'commonjs2',
     filename: 'server-build.js',
-    path: path.resolve(__dirname, '../server-build')
+    path: path.resolve(__dirname, '../server-build'),
   },
   // optimization: { // webpack4的配置，可以代替ExtractTextPlugin
   //   splitChunks: false
