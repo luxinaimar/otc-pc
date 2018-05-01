@@ -1,16 +1,10 @@
 <template>
   <div class="ccm-input" :class="{'ccm-input_active': isFocus }">
-    <div class="ccm-input-clear" v-if="_showClear" @click="handleClear">
-      <slot>
-        <i class="ccmic-closed"></i>
-      </slot>
-    </div>
-    <div class="ccm-input-eye" v-if="_showPwdEye" @click="handlePwdEye">
-      <slot>
-        <i :class="eyeClass"></i>
-      </slot>
+    <div class="ccm-input-prepend" v-if="$slots.prepend">
+      <slot name="prepend"></slot>
     </div>
     <input
+      class="ccm-input-field"
       ref="input"
       v-bind="$props"
       :type="_type"
@@ -21,6 +15,15 @@
       @focus="handleFocus"
       @blur="handleBlur"
     >
+    <div class="ccm-input-append" v-if="$slots.append || _showClear || _showPwdEye">
+      <div class="ccm-input-clear" v-if="_showClear" @click="handleClear">
+          <i class="ccmic-closed"></i>
+      </div>
+      <div class="ccm-input-eye" v-if="_showPwdEye" @click="handlePwdEye">
+          <i :class="eyeClass"></i>
+      </div>
+      <slot name="append"></slot>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -143,23 +146,29 @@ export default {
   @import "~common/less/mixin";
 
   .ccm-input{
-    position: relative;
+    display: flex;
+    align-items: center;
     font-size: @fontsize-medium;
     line-height: 1.429;
+    background-color: @input-bgc;
     .border-1px(@input-border-color);
-    input{
+    .ccm-input-field{
+      flex: 1;
       width: 100%;
       padding: 10px;
       box-sizing: border-box;
       line-height: inherit;
+      background-color: inherit;
       outline: none;
       border-radius: 2px;
       color: @input-color;
-      background-color: @input-bgc;
       &::-webkit-input-placeholder{
         color: @input-placeholder-color!important;
         text-overflow: ellipsis;
       }
+      // + .ccm-input-append{
+      //   margin-left: -5px;
+      // }
     }
   }
   .ccm-input_active{
@@ -167,36 +176,29 @@ export default {
       border-color: @input-focus-border-color;
     }
   }
+  .ccm-input-prepend, .ccm-input-append{
+    display: flex;
+    align-items: center;
+  }
+  // .ccm-input-prepend{
+  //   + .ccm-input-field{
+  //     margin-left: -5px;
+  //   }
+  // }
   .ccm-input-clear, .ccm-input-eye{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
     width: 1em;
     height: 1em;
-    padding: 10px .8em;
+    padding: 10px;
     line-height: 1;
-    margin: auto;
     color: @input-clear-icon-color;
     > i{
       display: inline-block;
       transform: scale(1.5);
     }
-    + input{
-      padding-right: 2.6em;
-    }
   }
   .ccm-input-eye{
     > .ccmic-eye-invisible, .ccmic-eye-visible{
         transform: scale(1.4);
-    }
-  }
-  .ccm-input-clear{
-    + .ccm-input-eye{
-      right: 2.6em;
-      + input{
-        padding-right: 5.2em;
-      }
     }
   }
 </style>

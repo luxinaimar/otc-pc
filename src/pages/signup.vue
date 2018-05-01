@@ -21,6 +21,12 @@
                   <ccm-input placeholder="请输入手机号" :clearable="true"></ccm-input>
                 </div>
                 <div class="input-item">
+                  <ccm-input placeholder="请输入图片验证码">
+                   <!--  <a href="#" slot="append" class="pic-code-btn">获取图片验证码</a> -->
+                   <img slot="append" class="pic-code-btn" src="https://www.firefoxotc.com/api/image/verify_code/signup?_t=1524818709708" />
+                  </ccm-input>
+                </div>
+                <div class="input-item">
                   <ccm-input placeholder="请输入密码" type="password" :eye="{eye}" :clearable="true"></ccm-input>
                 </div>
               </div>
@@ -118,6 +124,9 @@ export default {
       .ccm-input{
         font-size: @fontsize-large;
         line-height: 1.8;
+      }
+      .pic-code-btn{
+        margin-right: 5px;
       }
     }
     .clause{

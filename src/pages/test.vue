@@ -44,9 +44,15 @@ export default {
   methods: {
     _userReg(params) {
       userReg(params).then((res) => {
-        if (res.code === ERR_OK) {
+        if (res) {
           console.log(res)
         }
+      },
+      (res) => {
+        alert(ERR_OK)
+        alert(res.message)
+      }).catch((res) => {
+        console.log(res.code)
       })
     },
     ...mapMutations({

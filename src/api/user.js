@@ -1,11 +1,6 @@
-import axios from 'axios'
+import {request, xAxios} from './request'
 
-export function userReg(params) {
+export function userReg(params, noCatch) {
   const url = '/oex/user/register'
-
-  return axios.post(url, params).then((res) => {
-    return Promise.resolve(res.data)
-  }).catch((err) => {
-    console.log(err.response)
-  })
+  return request(xAxios.post(url, params), noCatch)
 }
