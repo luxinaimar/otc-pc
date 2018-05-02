@@ -15,26 +15,26 @@
             <div class="box-content">
               <div class="input-list">
                 <div class="input-item">
-                  <ccm-input placeholder="请输入用户名" :clearable="true"></ccm-input>
+                  <ccm-input placeholder="请输入用户名" :clearable="true" v-model='username'></ccm-input>
                 </div>
                 <div class="input-item">
-                  <ccm-input placeholder="请输入手机号" :clearable="true"></ccm-input>
+                  <ccm-input placeholder="请输入手机号" :clearable="true" v-model='phonenum'></ccm-input>
                 </div>
                 <div class="input-item">
-                  <ccm-input placeholder="请输入图片验证码">
+                  <ccm-input placeholder="请输入图片验证码" v-model='smscode'>
                    <!--  <a href="#" slot="append" class="pic-code-btn">获取图片验证码</a> -->
                    <img slot="append" class="pic-code-btn" src="https://www.firefoxotc.com/api/image/verify_code/signup?_t=1524818709708" />
                   </ccm-input>
                 </div>
                 <div class="input-item">
-                  <ccm-input placeholder="请输入密码" type="password" :eye="{eye}" :clearable="true"></ccm-input>
+                  <ccm-input placeholder="请输入密码" type="password" :eye="{eye}" :clearable="true" v-model='pwd'></ccm-input>
                 </div>
               </div>
               <div class="clause">
                 注册即表示同意<a href="#">《otc产品服务条款》</a>
               </div>
               <div class="box-bottom">
-                <ccm-button :primary="true">注册</ccm-button>
+                <ccm-button :primary="true" @click='userReg'>注册</ccm-button>
               </div>
             </div>
           </div>
@@ -48,6 +48,7 @@
 import otcPage from 'components/otc-page/otc-page'
 import ccmInput from 'base/input/input'
 import ccmButton from 'base/button/button'
+import {mapActions} from 'vuex'
 
 export default {
   name: 'signup',
@@ -55,17 +56,50 @@ export default {
     return {
       eye: {
         open: true
-      }
+      },
+      username: '',
+      phonenum: '',
+      smscode: '',
+      pwd: ''
     }
   },
   computed: {
 
   },
   created() {
-
+    // this.userReg()
+  },
+  mounted () {
+    this.$notify({
+      content: 'test notify',
+      btn: 'close'
+    })
+    this.$notify({
+      content: 'test notify',
+      btn: 'close'
+    })
+    this.$notify({
+      content: 'test notify',
+      btn: 'close'
+    })
   },
   methods: {
-
+    ...mapActions([
+      'userRegister'
+    ]),
+    userReg() {
+      console.log(this.username)
+      console.log(this.phonenum)
+      console.log(this.smscode)
+      console.log(this.pwd)
+      let data = {
+        'user_name': this.username,
+        'sms_code': this.smscode,
+        'mobile_phone': this.phonenum,
+        'passwd': this.pwd
+      }
+      this.userRegister(data)
+    }
   },
   components: {
     otcPage,

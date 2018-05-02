@@ -4,7 +4,6 @@ import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
 import state from './state'
-import user from './modules/user'
 import order from './modules/order'
 import createLogger from 'vuex/dist/logger'
 
@@ -21,7 +20,6 @@ export default () => {
     strict: debug,
     plugins: debug ? [createLogger()] : [],
     modules: {
-      user,
       order
     }
   })

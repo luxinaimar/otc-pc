@@ -1,8 +1,9 @@
 import axios from 'axios'
-import {ERR_OK} from 'api/config'
+import {ERR_OK, ERR_TIMEOUT, ERR_NOTFOUND, TIMEOUT} from 'api/config'
 
 export const xAxios = axios.create({
-  baseURL: '/'
+  baseURL: '/',
+  timeout: TIMEOUT
 })
 
 const req = (request) => {
@@ -17,9 +18,14 @@ const req = (request) => {
       }
       resolve(data.data)
     }).catch((err) => {
+      const errCode = err.code
+      const errMsg = err.message
       const res = err.response
-      if (res.status === 404) {
-        reject(createError(res.status, 'Not Found'))
+      if (errCode === 'ECONNABORTED' && errMsg.indexOf('timeout') !== -1) {
+        return reject(createError(ERR_TIMEOUT, 'timeout'))
+      }
+      if (res.status === ERR_NOTFOUND) {
+        return reject(createError(res.status, 'Not Found'))
       }
     })
   })
@@ -41,5 +47,5 @@ const createError = (code, msg) => {
 }
 
 const handleError = (err) => {
-  console.log(err)
+  console.log(err.code)
 }
