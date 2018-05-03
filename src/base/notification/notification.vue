@@ -1,8 +1,11 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" @after-leave="afterLeave" @after-enter="afterEnter">
     <div
       class="ccm-notification"
       :style="style"
+      v-show="visable"
+      @mouseenter="clearTimer"
+      @mouseleave="createTimer"
     >
       <span class="content">{{content}}</span>
       <a class="btn" @click="handleClose">{{btn}}</a>
@@ -24,16 +27,27 @@ export default {
       default: `关闭`
     }
   },
+  data() {
+    return {
+      visable: true
+    }
+  },
   computed: {
-    style () {
+    style() {
       return {}
     }
   },
   methods: {
-    handleClose (e) {
+    handleClose(e) {
       e.preventDefault()
       this.$emit('close')
-    }
+    },
+    afterLeave() {
+      this.$emit('closed')
+    },
+    afterEnter() {},
+    clearTimer() {},
+    createTimer() {}
   }
 }
 </script>

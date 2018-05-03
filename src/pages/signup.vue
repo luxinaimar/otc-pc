@@ -88,6 +88,10 @@ export default {
       'userRegister'
     ]),
     userReg() {
+      this.$notify({
+        content: 'test notify',
+        btn: 'close'
+      })
       console.log(this.username)
       console.log(this.phonenum)
       console.log(this.smscode)
